@@ -18,14 +18,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            padding: 2rem 1rem;
         }
 
         .container {
             text-align: center;
             color: white;
             max-width: 600px;
+            width: 100%;
             padding: 2rem;
+            margin: 2rem 0;
             border-radius: 20px;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -37,7 +39,9 @@
             text-align: center;
             color: white;
             max-width: 500px;
+            width: 100%;
             padding: 3rem;
+            margin: 2rem 0;
             border-radius: 20px;
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
@@ -173,7 +177,7 @@
     <script>
         function checkDate() {
             const today = new Date();
-            const targetDate = new Date(); // 10 janvier 2026
+            const targetDate = new Date('2026-01-10'); // 10 janvier 2026
             
             // Pour tester, tu peux changer la date cible à aujourd'hui :
             // const targetDate = new Date(); 
