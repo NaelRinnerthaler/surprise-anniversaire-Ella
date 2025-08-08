@@ -74,6 +74,160 @@
             animation: float 3s ease-in-out infinite;
         }
 
+        .gift-box {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.1);
+        }
+
+        .airplane {
+            font-size: 4rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+        }
+
+        .explosion {
+            font-size: 3rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: explode 0.8s ease-out forwards;
+        }
+
+        .airplane-takeoff {
+            animation: takeoff 3s ease-in-out forwards;
+            opacity: 1;
+        }
+
+        .airplane-fly-over-clouds {
+            animation: fly-over-clouds 4s ease-in-out forwards;
+        }
+
+        .clouds {
+            font-size: 3rem;
+            position: absolute;
+            opacity: 0;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .clouds-appear {
+            animation: clouds-float 2s ease-in-out forwards;
+        }
+
+        .parachutist {
+            font-size: 4rem;
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+        }
+
+        .parachutist-jump {
+            animation: parachutist-fall 4s ease-in-out forwards;
+            opacity: 1;
+        }
+
+        .parachute-drop {
+            animation: parachute-fall 3s ease-in-out forwards;
+        }
+
+        .hidden-content {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-in-out;
+        }
+
+        .reveal-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .click-instruction {
+            font-size: 1.1rem;
+            color: #ffeb3b;
+            margin-top: 1rem;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes explode {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(2); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+        }
+
+        @keyframes takeoff {
+            0% { 
+                transform: translate(-50%, -50%) scale(0.5) rotate(0deg); 
+                opacity: 0; 
+            }
+            30% { 
+                transform: translate(-50%, -50%) scale(1) rotate(15deg); 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translate(-200px, -150px) scale(1.2) rotate(45deg); 
+                opacity: 1; 
+            }
+        }
+
+        @keyframes fly-over-clouds {
+            0% { 
+                transform: translate(-200px, -150px) scale(1.2) rotate(45deg); 
+            }
+            50% { 
+                transform: translate(200px, -200px) scale(0.8) rotate(0deg); 
+            }
+            100% { 
+                transform: translate(400px, -180px) scale(0.6) rotate(-15deg); 
+                opacity: 0; 
+            }
+        }
+
+        @keyframes clouds-float {
+            0% { opacity: 0; transform: translateY(50px); }
+            50% { opacity: 1; transform: translateY(0px); }
+            100% { opacity: 0.7; transform: translateY(-20px); }
+        }
+
+        @keyframes parachutist-fall {
+            0% { 
+                transform: translateX(-50%) translateY(-50px) scale(0.3); 
+                opacity: 0; 
+            }
+            20% { 
+                transform: translateX(-50%) translateY(0px) scale(0.5); 
+                opacity: 1; 
+            }
+            60% { 
+                transform: translateX(-50%) translateY(100px) scale(0.8); 
+            }
+            100% { 
+                transform: translateX(-50%) translateY(200px) scale(1); 
+                opacity: 0; 
+            }
+        }
+
+        @keyframes parachute-fall {
+            0% { transform: translateY(0px) scale(1); opacity: 0; }
+            20% { opacity: 1; }
+            50% { transform: translateY(100px) scale(0.8); }
+            100% { transform: translateY(200px) scale(0.6); opacity: 0; }
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.5; }
+        }
+
         .message {
             font-size: 1.3rem;
             line-height: 1.6;
@@ -177,7 +331,7 @@
     <script>
         function checkDate() {
             const today = new Date();
-            const targetDate = new Date(); // 10 janvier 2026
+            const targetDate = new Date('2026-01-10'); // 10 janvier 2026
             
             // Pour tester, tu peux changer la date cible à aujourd'hui :
             // const targetDate = new Date(); 
@@ -198,13 +352,29 @@
             const contentDiv = document.getElementById('content');
             contentDiv.innerHTML = `
                 <div class="container">
-                    <div class="gift-box">🎁</div>
+                    <div class="gift-box" id="giftBox">🎁</div>
                     <h1>JOYEUX ANNIVERSAIRE ! 🎉</h1>
-                    <h2>Tu as enfin 18 ANS ! ✨</h2>
+                    <h2>Bienvenue dans tes 18 ans ! ✨</h2>
                     
-                    <div class="parachute">🪂</div>
+                    <div class="click-instruction" id="clickInstruction">
+                        👆 Clique sur le cadeau pour découvrir ta surprise !
+                    </div>
                     
-                    <div class="message">
+                    <!-- Éléments d'animation cachés -->
+                    <div class="explosion" id="explosion" style="display: none;">💥💥💥</div>
+                    <div class="airplane" id="airplane">✈️</div>
+                    
+                    <!-- Nuages -->
+                    <div class="clouds" id="cloud1" style="top: 25%; left: 20%;">☁️</div>
+                    <div class="clouds" id="cloud2" style="top: 30%; right: 25%;">☁️</div>
+                    <div class="clouds" id="cloud3" style="top: 35%; left: 60%;">☁️</div>
+                    
+                    <!-- Parachutiste -->
+                    <div class="parachutist" id="parachutist">🪂</div>
+                    
+                    <div class="parachute" id="parachute" style="display: none;">🪂</div>
+                    
+                    <div class="message hidden-content" id="surpriseMessage">
                         <p><strong>SURPRISE !</strong></p>
                         <p>Ton cadeau d'anniversaire est... un <strong>SAUT EN PARACHUTE</strong> ! 🤸‍♀️</p>
                         <br>
@@ -216,11 +386,75 @@
                         <p><em>- Ton frère/ta sœur qui pense à toi depuis l'étranger</em></p>
                     </div>
                     
-                    <div class="birthday-date">
+                    <div class="birthday-date hidden-content" id="birthdayDate">
                         🎂 10 janvier 2026 - Le jour de tes 18 ans ! 🎂
                     </div>
                 </div>
             `;
+            
+            // Ajouter l'événement de clic sur le cadeau
+            const giftBox = document.getElementById('giftBox');
+            giftBox.addEventListener('click', function() {
+                revealSurprise();
+            });
+        }
+        
+        function revealSurprise() {
+            const giftBox = document.getElementById('giftBox');
+            const explosion = document.getElementById('explosion');
+            const airplane = document.getElementById('airplane');
+            const clouds = [
+                document.getElementById('cloud1'),
+                document.getElementById('cloud2'),
+                document.getElementById('cloud3')
+            ];
+            const parachutist = document.getElementById('parachutist');
+            const surpriseMessage = document.getElementById('surpriseMessage');
+            const birthdayDate = document.getElementById('birthdayDate');
+            const clickInstruction = document.getElementById('clickInstruction');
+            
+            // Masquer l'instruction de clic
+            clickInstruction.style.display = 'none';
+            
+            // ÉTAPE 1: Explosion du cadeau (0.8s)
+            explosion.style.display = 'block';
+            giftBox.style.opacity = '0';
+            
+            setTimeout(() => {
+                explosion.style.display = 'none';
+                giftBox.style.display = 'none';
+                
+                // ÉTAPE 2: Apparition et décollage de l'avion (3s)
+                airplane.classList.add('airplane-takeoff');
+                
+                setTimeout(() => {
+                    // ÉTAPE 3: Faire apparaître les nuages (2s)
+                    clouds.forEach((cloud, index) => {
+                        setTimeout(() => {
+                            cloud.classList.add('clouds-appear');
+                        }, index * 300);
+                    });
+                    
+                    // ÉTAPE 4: L'avion vole au-dessus des nuages (4s)
+                    airplane.classList.remove('airplane-takeoff');
+                    airplane.classList.add('airplane-fly-over-clouds');
+                    
+                    setTimeout(() => {
+                        // ÉTAPE 5: Le parachutiste saute de l'avion (4s)
+                        parachutist.classList.add('parachutist-jump');
+                        
+                        setTimeout(() => {
+                            // ÉTAPE 6: Révélation du message final avec confettis
+                            surpriseMessage.classList.add('reveal-content');
+                            birthdayDate.classList.add('reveal-content');
+                            createConfetti();
+                        }, 2500); // Révèle le message pendant que le parachutiste tombe
+                        
+                    }, 2000); // Attendre que l'avion soit au-dessus des nuages
+                    
+                }, 3000); // Attendre la fin du décollage
+                
+            }, 800); // Durée de l'explosion
         }
         
         function showLockedMessage(targetDate) {
