@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise pour tes 18 ans ! 🎂</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            color: white;
+            max-width: 600px;
+            padding: 2rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease-in;
+        }
+
+        .locked-container {
+            text-align: center;
+            color: white;
+            max-width: 500px;
+            padding: 3rem;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: bounce 2s infinite;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #ffeb3b;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .gift-box {
+            font-size: 8rem;
+            margin: 2rem 0;
+            animation: pulse 2s infinite;
+        }
+
+        .parachute {
+            font-size: 6rem;
+            margin: 1rem 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .message {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .countdown {
+            font-size: 1.5rem;
+            color: #ffeb3b;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .lock-icon {
+            font-size: 4rem;
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ffeb3b;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .birthday-date {
+            font-size: 1.1rem;
+            color: #ffcdd2;
+            margin-top: 1rem;
+        }
+
+        .heart {
+            color: #ff6b9d;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.2); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.2); }
+            70% { transform: scale(1); }
+        }
+
+        .sparkles {
+            position: absolute;
+            font-size: 2rem;
+            animation: sparkle 2s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <!-- Le contenu sera généré par JavaScript -->
+    </div>
+
+    <!-- Confettis animés -->
+    <div id="confetti-container"></div>
+    
+    <!-- Étoiles scintillantes -->
+    <div class="sparkles" style="top: 10%; left: 10%; animation-delay: 0s;">✨</div>
+    <div class="sparkles" style="top: 20%; right: 15%; animation-delay: 0.5s;">⭐</div>
+    <div class="sparkles" style="bottom: 30%; left: 20%; animation-delay: 1s;">✨</div>
+    <div class="sparkles" style="bottom: 15%; right: 25%; animation-delay: 1.5s;">⭐</div>
+
+    <script>
+        function checkDate() {
+            const today = new Date();
+            const targetDate = new Date('2026-01-10'); // 10 janvier 2026
+            
+            // Pour tester, tu peux changer la date cible à aujourd'hui :
+            // const targetDate = new Date(); 
+            
+            const contentDiv = document.getElementById('content');
+            
+            if (today.toDateString() === targetDate.toDateString()) {
+                // C'est le bon jour ! Afficher la surprise
+                showSurprise();
+                createConfetti();
+            } else {
+                // Pas encore le bon jour
+                showLockedMessage(targetDate);
+            }
+        }
+        
+        function showSurprise() {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = `
+                <div class="container">
+                    <div class="gift-box">🎁</div>
+                    <h1>JOYEUX ANNIVERSAIRE ! 🎉</h1>
+                    <h2>Bienvenue dans tes 18 ans ! ✨</h2>
+                    
+                    <div class="parachute">🪂</div>
+                    
+                    <div class="message">
+                        <p><strong>SURPRISE !</strong></p>
+                        <p>Ton cadeau d'anniversaire est... un <strong>SAUT EN PARACHUTE</strong> ! 🤸‍♀️</p>
+                        <br>
+                        <p>Je sais que je ne peux pas être là physiquement pour tes 18 ans, mais j'ai voulu te faire quelque chose d'inoubliable !</p>
+                        <br>
+                        <p>Prépare-toi à vivre une expérience EXTRAORDINAIRE ! Tu vas littéralement toucher les nuages ! ☁️</p>
+                        <br>
+                        <p>Je t'aime fort ma petite sœur <span class="heart">❤️</span></p>
+                        <p><em>- Ton frère/ta sœur qui pense à toi depuis l'étranger</em></p>
+                    </div>
+                    
+                    <div class="birthday-date">
+                        🎂 10 janvier 2026 - Le jour de tes 18 ans ! 🎂
+                    </div>
+                </div>
+            `;
+        }
+        
+        function showLockedMessage(targetDate) {
+            const contentDiv = document.getElementById('content');
+            const timeUntilBirthday = getTimeUntilDate(targetDate);
+            
+            contentDiv.innerHTML = `
+                <div class="locked-container">
+                    <div class="lock-icon">🔒</div>
+                    <h2>Ce site est verrouillé !</h2>
+                    <div class="message">
+                        <p>Cette surprise sera débloquée le <strong>10 janvier 2026</strong></p>
+                        <p>pour le 18ème anniversaire d'une personne très spéciale !</p>
+                        <br>
+                        <p>Patience... La surprise en vaut la peine ! 😉</p>
+                    </div>
+                    
+                    <div class="countdown">
+                        ⏰ Plus que ${timeUntilBirthday} !
+                    </div>
+                </div>
+            `;
+        }
+        
+        function getTimeUntilDate(targetDate) {
+            const now = new Date();
+            const timeDiff = targetDate.getTime() - now.getTime();
+            
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            if (days > 0) {
+                return `${days} jours, ${hours} heures`;
+            } else if (hours > 0) {
+                return `${hours} heures, ${minutes} minutes`;
+            } else {
+                return `${minutes} minutes`;
+            }
+        }
+        
+        function createConfetti() {
+            const colors = ['#ffeb3b', '#ff6b9d', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7'];
+            const confettiContainer = document.getElementById('confetti-container');
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confettiContainer.appendChild(confetti);
+            }
+        }
+        
+        // Vérifier la date au chargement de la page
+        checkDate();
+        
+        // Vérifier la date toutes les minutes
+        setInterval(checkDate, 60000);
+    </script>
+</body>
+</html>
