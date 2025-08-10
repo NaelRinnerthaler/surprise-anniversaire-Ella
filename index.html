@@ -13,13 +13,12 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #1E88B8;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 2rem 1rem;
-            overflow-x: hidden;
         }
 
         .container {
@@ -34,7 +33,6 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
             animation: fadeIn 2s ease-in;
-            position: relative;
         }
 
         .locked-container {
@@ -68,114 +66,12 @@
             font-size: 8rem;
             margin: 2rem 0;
             animation: pulse 2s infinite;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            position: relative;
-            z-index: 10;
         }
 
-        .gift-box:hover {
-            transform: scale(1.1);
-        }
-
-        .click-instruction {
-            font-size: 1.1rem;
-            color: #ffeb3b;
-            margin-top: 1rem;
-            animation: blink 2s infinite;
-        }
-
-        /* EXPLOSION PLEIN ÉCRAN */
-        .explosion-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(circle, #ff4500 0%, #ff6347 15%, #ffd700 30%, #ff8c00 50%, #dc143c 70%, #000000 100%);
-            z-index: 1000;
-            display: none;
-            animation: explosion-flash 1.2s ease-out forwards;
-        }
-
-        .explosion-particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .particle {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-        }
-
-        .particle:nth-child(1) { background: #ff4500; animation: particle-burst 1.2s ease-out forwards; transform: rotate(0deg); }
-        .particle:nth-child(2) { background: #ffd700; animation: particle-burst 1.2s ease-out forwards; transform: rotate(30deg); }
-        .particle:nth-child(3) { background: #ff6347; animation: particle-burst 1.2s ease-out forwards; transform: rotate(60deg); }
-        .particle:nth-child(4) { background: #ff8c00; animation: particle-burst 1.2s ease-out forwards; transform: rotate(90deg); }
-        .particle:nth-child(5) { background: #dc143c; animation: particle-burst 1.2s ease-out forwards; transform: rotate(120deg); }
-        .particle:nth-child(6) { background: #ffff00; animation: particle-burst 1.2s ease-out forwards; transform: rotate(150deg); }
-        .particle:nth-child(7) { background: #ff4500; animation: particle-burst 1.2s ease-out forwards; transform: rotate(180deg); }
-        .particle:nth-child(8) { background: #ffd700; animation: particle-burst 1.2s ease-out forwards; transform: rotate(210deg); }
-        .particle:nth-child(9) { background: #ff6347; animation: particle-burst 1.2s ease-out forwards; transform: rotate(240deg); }
-        .particle:nth-child(10) { background: #ff8c00; animation: particle-burst 1.2s ease-out forwards; transform: rotate(270deg); }
-        .particle:nth-child(11) { background: #dc143c; animation: particle-burst 1.2s ease-out forwards; transform: rotate(300deg); }
-        .particle:nth-child(12) { background: #ffff00; animation: particle-burst 1.2s ease-out forwards; transform: rotate(330deg); }
-
-        /* AVION RÉALISTE */
-        .airplane {
-            font-size: 8rem;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0;
-            z-index: 500;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-        }
-
-        .airplane-takeoff {
-            animation: realistic-takeoff 4s ease-in-out forwards;
-            opacity: 1;
-        }
-
-        .airplane-fly-over-clouds {
-            animation: realistic-fly-over-clouds 5s ease-in-out forwards;
-        }
-
-        /* NUAGES RÉALISTES */
-        .clouds {
+        .parachute {
             font-size: 6rem;
-            position: fixed;
-            opacity: 0;
-            color: rgba(255, 255, 255, 0.9);
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 400;
-        }
-
-        .clouds-appear {
-            animation: realistic-clouds-float 3s ease-in-out forwards;
-        }
-
-        /* PARACHUTISTE RÉALISTE */
-        .parachutist {
-            font-size: 8rem;
-            position: fixed;
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            z-index: 600;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-        }
-
-        .parachutist-jump {
-            animation: realistic-parachutist-fall 6s ease-in-out forwards;
-            opacity: 1;
+            margin: 1rem 0;
+            animation: float 3s ease-in-out infinite;
         }
 
         .message {
@@ -206,113 +102,6 @@
             animation: confetti-fall 3s linear infinite;
         }
 
-        .hidden-content {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1.5s ease-in-out;
-        }
-
-        .reveal-content {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .birthday-date {
-            font-size: 1.1rem;
-            color: #ffcdd2;
-            margin-top: 1rem;
-        }
-
-        .heart {
-            color: #ff6b9d;
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-
-        .sparkles {
-            position: absolute;
-            font-size: 2rem;
-            animation: sparkle 2s linear infinite;
-        }
-
-        /* ANIMATIONS RÉALISTES */
-        @keyframes explosion-flash {
-            0% { opacity: 0; transform: scale(0); }
-            10% { opacity: 1; transform: scale(0.5); }
-            30% { opacity: 1; transform: scale(1.2); }
-            60% { opacity: 0.8; transform: scale(1.5); }
-            100% { opacity: 0; transform: scale(2); }
-        }
-
-        @keyframes particle-burst {
-            0% { 
-                transform: translate(-50%, -50%) translateY(0px) scale(0); 
-                opacity: 1; 
-            }
-            50% { 
-                transform: translate(-50%, -50%) translateY(-300px) scale(1.5); 
-                opacity: 0.8; 
-            }
-            100% { 
-                transform: translate(-50%, -50%) translateY(-500px) scale(0); 
-                opacity: 0; 
-            }
-        }
-
-        @keyframes realistic-takeoff {
-            0% { 
-                transform: translate(-50%, -50%) scale(0.3) rotate(-45deg); 
-                opacity: 0; 
-            }
-            20% { 
-                transform: translate(-50%, -50%) scale(0.8) rotate(-30deg); 
-                opacity: 1; 
-            }
-            100% { 
-                transform: translate(-70vw, -40vh) scale(1.2) rotate(15deg); 
-                opacity: 1; 
-            }
-        }
-
-        @keyframes realistic-fly-over-clouds {
-            0% { 
-                transform: translate(-70vw, -40vh) scale(1.2) rotate(15deg); 
-            }
-            50% { 
-                transform: translate(0vw, -50vh) scale(1) rotate(0deg); 
-            }
-            100% { 
-                transform: translate(70vw, -45vh) scale(0.8) rotate(-10deg); 
-                opacity: 0; 
-            }
-        }
-
-        @keyframes realistic-clouds-float {
-            0% { opacity: 0; transform: translateY(100px) scale(0.5); }
-            50% { opacity: 1; transform: translateY(0px) scale(1); }
-            100% { opacity: 0.8; transform: translateY(-50px) scale(1.1); }
-        }
-
-        @keyframes realistic-parachutist-fall {
-            0% { 
-                transform: translateX(-50%) translateY(-100px) scale(0.2) rotate(180deg); 
-                opacity: 0; 
-            }
-            15% { 
-                transform: translateX(-50%) translateY(0px) scale(0.4) rotate(0deg); 
-                opacity: 1; 
-            }
-            40% { 
-                transform: translateX(-50%) translateY(200px) scale(0.7) rotate(0deg); 
-            }
-            70% { 
-                transform: translateX(-50%) translateY(400px) scale(1) rotate(0deg); 
-            }
-            100% { 
-                transform: translateX(-50%) translateY(600px) scale(1.2) rotate(0deg); 
-                opacity: 0; 
-            }
-        }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
@@ -330,14 +119,25 @@
             100% { transform: scale(1); }
         }
 
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0.5; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
         @keyframes confetti-fall {
             0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
             100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .birthday-date {
+            font-size: 1.1rem;
+            color: #ffcdd2;
+            margin-top: 1rem;
+        }
+
+        .heart {
+            color: #ff6b9d;
+            animation: heartbeat 1.5s ease-in-out infinite;
         }
 
         @keyframes heartbeat {
@@ -346,6 +146,12 @@
             28% { transform: scale(1); }
             42% { transform: scale(1.2); }
             70% { transform: scale(1); }
+        }
+
+        .sparkles {
+            position: absolute;
+            font-size: 2rem;
+            animation: sparkle 2s linear infinite;
         }
 
         @keyframes sparkle {
@@ -357,24 +163,6 @@
 <body>
     <div id="content">
         <!-- Le contenu sera généré par JavaScript -->
-    </div>
-
-    <!-- Explosion plein écran -->
-    <div class="explosion-overlay" id="explosionOverlay">
-        <div class="explosion-particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
     </div>
 
     <!-- Confettis animés -->
@@ -389,7 +177,7 @@
     <script>
         function checkDate() {
             const today = new Date();
-            const targetDate = new Date(); // 10 janvier 2026
+            const targetDate = new Date('2026-01-10'); // 10 janvier 2026
             
             // Pour tester, tu peux changer la date cible à aujourd'hui :
             // const targetDate = new Date(); 
@@ -399,6 +187,7 @@
             if (today.toDateString() === targetDate.toDateString()) {
                 // C'est le bon jour ! Afficher la surprise
                 showSurprise();
+                createConfetti();
             } else {
                 // Pas encore le bon jour
                 showLockedMessage(targetDate);
@@ -409,15 +198,13 @@
             const contentDiv = document.getElementById('content');
             contentDiv.innerHTML = `
                 <div class="container">
-                    <div class="gift-box" id="giftBox">🎁</div>
+                    <div class="gift-box">🎁</div>
                     <h1>JOYEUX ANNIVERSAIRE ! 🎉</h1>
-                    <h2>Tu as enfin 18 ANS ! ✨</h2>
+                    <h2>Bienvenue dans tes 18 ans ! ✨</h2>
                     
-                    <div class="click-instruction" id="clickInstruction">
-                        👆 Clique sur le cadeau pour découvrir ta surprise !
-                    </div>
+                    <div class="parachute">🪂</div>
                     
-                    <div class="message hidden-content" id="surpriseMessage">
+                    <div class="message">
                         <p><strong>SURPRISE !</strong></p>
                         <p>Ton cadeau d'anniversaire est... un <strong>SAUT EN PARACHUTE</strong> ! 🤸‍♀️</p>
                         <br>
@@ -425,94 +212,15 @@
                         <br>
                         <p>Prépare-toi à vivre une expérience EXTRAORDINAIRE ! Tu vas littéralement toucher les nuages ! ☁️</p>
                         <br>
-                        <p>Je t'aime fort ma grande sœur chérie <span class="heart">❤️</span></p>
-                        <p><em>- Nael qui t'aime de tout son coeur même à Lakewood -</em></p>
+                        <p>Je t'aime fort ma petite sœur <span class="heart">❤️</span></p>
+                        <p><em>- Ton frère/ta sœur qui pense à toi depuis l'étranger</em></p>
                     </div>
                     
-                    <div class="birthday-date hidden-content" id="birthdayDate">
+                    <div class="birthday-date">
                         🎂 10 janvier 2026 - Le jour de tes 18 ans ! 🎂
                     </div>
                 </div>
-
-                <!-- Éléments d'animation en position fixe pour effet cinématographique -->
-                <div class="airplane" id="airplane">✈️</div>
-                
-                <!-- Nuages répartis sur l'écran -->
-                <div class="clouds" id="cloud1" style="top: 25%; left: 15%;">☁️</div>
-                <div class="clouds" id="cloud2" style="top: 30%; right: 20%;">☁️</div>
-                <div class="clouds" id="cloud3" style="top: 35%; left: 60%;">☁️</div>
-                <div class="clouds" id="cloud4" style="top: 40%; left: 30%;">☁️</div>
-                <div class="clouds" id="cloud5" style="top: 20%; right: 45%;">☁️</div>
-                
-                <!-- Parachutiste -->
-                <div class="parachutist" id="parachutist">🪂</div>
             `;
-            
-            // Ajouter l'événement de clic sur le cadeau
-            const giftBox = document.getElementById('giftBox');
-            giftBox.addEventListener('click', function() {
-                revealSurprise();
-            });
-        }
-        
-        function revealSurprise() {
-            const explosionOverlay = document.getElementById('explosionOverlay');
-            const airplane = document.getElementById('airplane');
-            const clouds = [
-                document.getElementById('cloud1'),
-                document.getElementById('cloud2'),
-                document.getElementById('cloud3'),
-                document.getElementById('cloud4'),
-                document.getElementById('cloud5')
-            ];
-            const parachutist = document.getElementById('parachutist');
-            const surpriseMessage = document.getElementById('surpriseMessage');
-            const birthdayDate = document.getElementById('birthdayDate');
-            const clickInstruction = document.getElementById('clickInstruction');
-            
-            // Masquer l'instruction de clic
-            clickInstruction.style.display = 'none';
-            
-            // ÉTAPE 1: Explosion plein écran réaliste (1.2s)
-            explosionOverlay.style.display = 'block';
-            
-            setTimeout(() => {
-                explosionOverlay.style.display = 'none';
-                
-                // ÉTAPE 2: Apparition et décollage réaliste de l'avion (4s)
-                airplane.classList.add('airplane-takeoff');
-                
-                setTimeout(() => {
-                    // ÉTAPE 3: Faire apparaître les nuages de façon échelonnée (3s)
-                    clouds.forEach((cloud, index) => {
-                        setTimeout(() => {
-                            if (cloud) cloud.classList.add('clouds-appear');
-                        }, index * 400);
-                    });
-                    
-                    setTimeout(() => {
-                        // ÉTAPE 4: L'avion vole majestueusement au-dessus des nuages (5s)
-                        airplane.classList.remove('airplane-takeoff');
-                        airplane.classList.add('airplane-fly-over-clouds');
-                        
-                        setTimeout(() => {
-                            // ÉTAPE 5: Le parachutiste saute de l'avion (6s)
-                            parachutist.classList.add('parachutist-jump');
-                            
-                            setTimeout(() => {
-                                // ÉTAPE 6: Révélation épique du message final avec confettis
-                                surpriseMessage.classList.add('reveal-content');
-                                birthdayDate.classList.add('reveal-content');
-                                createConfetti();
-                            }, 3000); // Révèle le message pendant la chute
-                            
-                        }, 2500); // Attendre que l'avion survole les nuages
-                        
-                    }, 2000); // Laisser les nuages s'installer
-                    
-                }, 4000); // Attendre la fin du décollage
-                
-            }, 1200); // Durée de l'explosion
         }
         
         function showLockedMessage(targetDate) {
@@ -558,7 +266,7 @@
             const colors = ['#ffeb3b', '#ff6b9d', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7'];
             const confettiContainer = document.getElementById('confetti-container');
             
-            for (let i = 0; i < 80; i++) {
+            for (let i = 0; i < 50; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + '%';
